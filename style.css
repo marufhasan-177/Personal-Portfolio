@@ -18,7 +18,9 @@
   html { scroll-behavior: smooth; }
   body {
     font-family: 'Syne', sans-serif;
-    background: var(--bg);
+    background:
+      radial-gradient(circle at 0% 0%, rgba(170, 18, 42, 0.28), transparent 38%),
+      linear-gradient(135deg, #16050a 0%, #0d080e 42%, var(--bg) 100%);
     color: var(--text);
     min-height: 100vh;
     overflow-x: hidden;
@@ -75,11 +77,18 @@
     min-height: 100vh;
     display: flex;
     align-items: center;
-    padding: 8rem 2rem 4rem;
-    max-width: 1100px;
+    gap: 4rem;
+    padding: 0 0 0 4rem;
+    max-width: none;
     margin: 0 auto;
   }
-  .hero-content { max-width: 720px; }
+  .hero-content {
+    order: 1;
+    flex: none;
+    width: calc(50% - 2rem);
+    max-width: 720px;
+    padding: 8rem 2rem 4rem;
+  }
   .hero-tag {
     display: inline-flex;
     align-items: center;
@@ -103,11 +112,12 @@
     margin-bottom: 0.25rem;
   }
   .hero h1 .name-line { display: block; }
+  .hero h1 .name-line:first-child {
+    color: #FFFFFF;
+  }
   .hero h1 .accent-word {
-    background: linear-gradient(135deg, var(--accent), var(--accent2));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: #99C2FF;
+    font-size: 0.82em;
   }
   .hero-sub {
     font-family: 'JetBrains Mono', monospace;
@@ -446,37 +456,69 @@
   }
 
   .hero-img-wrap {
-    flex-shrink: 0;
+    order: 2;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50vw;
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
   }
   .hero-img-ring {
-    width: 280px;
-    height: 280px;
-    border-radius: 4px;
-    border: 1px solid var(--border-bright);
+    width: 100%;
+    height: 100%;
     overflow: hidden;
     position: relative;
-    box-shadow: 0 0 40px rgba(99,102,241,0.12);
   }
   .hero-img-ring::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border: 2px solid rgba(99,102,241,0.15);
-    border-radius: 4px;
+    display: none;
   }
   .hero-img {
+    content: url('assets/Maruf%20Hasan.png');
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center top;
     filter: grayscale(10%) contrast(1.05);
     display: block;
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.35) 10%, #000 28%);
+    mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.35) 10%, #000 28%);
   }
   @media (max-width: 640px) {
-    .hero-img-wrap { display: none; }
+    body {
+      background:
+        radial-gradient(circle at 50% 0%, rgba(145, 16, 38, 0.22), transparent 46%),
+        linear-gradient(180deg, #120409 0%, #0a0a0f 58%, var(--bg) 100%);
+    }
+    .hero {
+      flex-direction: column;
+      justify-content: center;
+      gap: 2rem;
+      padding: 7rem 1.5rem 3rem;
+    }
+    .hero-img-wrap {
+      order: 1;
+      position: relative;
+      top: auto;
+      right: auto;
+      width: min(78vw, 360px);
+      height: min(78vw, 360px);
+    }
+    .hero-content {
+      order: 2;
+      flex: none;
+      width: auto;
+      padding: 0;
+      text-align: center;
+    }
+    .hero-img {
+      -webkit-mask-image: none;
+      mask-image: none;
+    }
+    .hero-sub { margin-left: auto; margin-right: auto; }
+    .hero-cta { justify-content: center; }
 
     .about-grid { grid-template-columns: 1fr; }
     .nav-links { display: none; }
